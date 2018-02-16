@@ -4,10 +4,19 @@ export interface IWeatherService {
 }
 
 export class WeatherService implements IWeatherService {
-    getWeatherByCity(city: string) {
-        return weather.find({search: city, degreeType: 'C'},function(err,result){
-          return JSON.stringify(result,null,0)
-      });
+    getWeatherByCity(city: string):Promise<any> {
+        return new Promise(function (resolve, reject) {
+            weather.find({search: city, degreeType: 'C'},function (err,result) {
+                if(err)
+                 reject(err);
+                else {
+                    let value = "Temperature of "+result[0].location.name+" is " + result[0].current.temperature;
+                    resolve(value);
+                }
+
+            });
+        })
+
 
     }
 }

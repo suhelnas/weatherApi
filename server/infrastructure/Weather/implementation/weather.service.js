@@ -1,15 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var weather = require("weather-js");
-var WeatherService = (function () {
-    function WeatherService() {
-    }
-    WeatherService.prototype.getWeatherByCity = function (city) {
-        return weather.find({ search: city, degreeType: 'C' }, function (err, result) {
-            return JSON.stringify(result, null, 0);
+const weather = require("weather-js");
+class WeatherService {
+    getWeatherByCity(city) {
+        return new Promise(function (resolve, reject) {
+            weather.find({ search: city, degreeType: 'C' }, function (err, result) {
+                if (err)
+                    reject(err);
+                else {
+                    let value = "Temperature of " + result[0].location.name + " is " + result[0].current.temperature;
+                    resolve(value);
+                }
+            });
         });
-    };
-    return WeatherService;
-}());
+    }
+}
 exports.WeatherService = WeatherService;
 //# sourceMappingURL=weather.service.js.map

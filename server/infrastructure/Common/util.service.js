@@ -1,21 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Util = (function () {
-    function Util() {
-    }
-    Util.sendResponse = function (err, data, res, msg, rawData) {
+class Util {
+    static sendResponse(err, data, res, msg, rawData) {
         return Util.sendResponseAfterLogResponse(err, data, res, msg, rawData);
-    };
-    Util.sendSuccessResponse = function (data, res) {
+    }
+    static sendSuccessResponse(data, res) {
         return res.status(200).json({ data: data });
-    };
-    Util.sendRawSuccessResponse = function (data, res) {
+    }
+    static sendRawSuccessResponse(data, res) {
         return res.status(200).send(data);
-    };
-    Util.sendSuccessMessageResponse = function (data, res, msg) {
+    }
+    static sendSuccessMessageResponse(data, res, msg) {
         return res.status(200).json({ message: msg, data: data });
-    };
-    Util.sendResponseAfterLogResponse = function (err, data, res, msg, rawData) {
+    }
+    static sendResponseAfterLogResponse(err, data, res, msg, rawData) {
         if (err) {
             return Util.sendErrorResponse(err, res);
         }
@@ -28,11 +26,11 @@ var Util = (function () {
         else {
             return Util.sendSuccessResponse(data, res);
         }
-    };
-    Util.sendErrorResponse = function (err, res) {
-        var errMsg = 'Some technical error occurred. Please contact administrator.';
-        var errCode = 400;
-        var errObj = null;
+    }
+    static sendErrorResponse(err, res) {
+        let errMsg = 'Some technical error occurred. Please contact administrator.';
+        let errCode = 400;
+        let errObj = null;
         try {
             errObj = JSON.parse(err.message);
             errObj.errorCode = err.errorCode;
@@ -48,8 +46,7 @@ var Util = (function () {
             errMsg = err.message || 'Some technical error occurred. Please contact administrator.';
         }
         return res.status(errCode).json({ message: errMsg });
-    };
-    return Util;
-}());
+    }
+}
 exports.Util = Util;
 //# sourceMappingURL=util.service.js.map

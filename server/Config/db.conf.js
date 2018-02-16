@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var DbConfig = (function () {
-    function DbConfig() {
-    }
-    DbConfig.getDbDefaultCallbackHandle = function () {
+class DbConfig {
+    static getDbDefaultCallbackHandle() {
         return function (promise, cb) {
             if (cb == null)
                 return promise;
@@ -13,8 +11,7 @@ var DbConfig = (function () {
                 cb(err);
             });
         };
-    };
-    return DbConfig;
-}());
+    }
+}
 exports.DbConfig = DbConfig;
 //# sourceMappingURL=db.conf.js.map
