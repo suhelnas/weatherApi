@@ -5,12 +5,9 @@ export interface IWeatherService {
 
 export class WeatherService implements IWeatherService {
     getWeatherByCity(city: string) {
-
-      let promise =  weather.find({search: 'San Francisco, CA', degreeType: 'F'});
-     promise =  promise.then(function(result){
-          return JSON.stringify(result,null,2)
+        return weather.find({search: city, degreeType: 'C'},function(err,result){
+          return JSON.stringify(result,null,0)
       });
-     return promise;
 
     }
 }

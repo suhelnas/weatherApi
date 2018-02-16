@@ -5,11 +5,9 @@ var WeatherService = (function () {
     function WeatherService() {
     }
     WeatherService.prototype.getWeatherByCity = function (city) {
-        var promise = weather.find({ search: 'San Francisco, CA', degreeType: 'F' });
-        promise = promise.then(function (result) {
-            return JSON.stringify(result, null, 2);
+        return weather.find({ search: city, degreeType: 'C' }, function (err, result) {
+            return JSON.stringify(result, null, 0);
         });
-        return promise;
     };
     return WeatherService;
 }());
